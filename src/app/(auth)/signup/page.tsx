@@ -64,7 +64,6 @@ export default function SignupPage() {
     confirmPassword: false,
   });
   const [isSuccess, setIsSuccess] = useState(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -114,7 +113,7 @@ export default function SignupPage() {
                   in with your credentials.
                 </p>
               </div>
-              <Button asChild className="w-full mt-4">
+              <Button asChild className="w-full mt-4 cursor-pointer">
                 <Link href="/signin">Go to Sign In</Link>
               </Button>
             </div>
@@ -130,7 +129,7 @@ export default function SignupPage() {
               </CardDescription>
             </CardHeader>
             {errors.root && (
-              <div className="mx-(--card-spacing) flex items-center gap-2 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              <div className="mb-2 flex items-center justify-center gap-1 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
                 <CircleAlertIcon className="size-4 shrink-0" />
                 <span>{errors.root.message}</span>
               </div>

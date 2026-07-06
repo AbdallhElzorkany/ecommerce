@@ -79,7 +79,7 @@ export default function SigninPage() {
           </CardDescription>
         </CardHeader>
         {errors.root && (
-          <div className="mx-(--card-spacing) flex items-center gap-2 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+          <div className="mb-2 flex items-center justify-center gap-1 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             <CircleAlertIcon className="size-4 shrink-0" />
             <span>{errors.root.message}</span>
           </div>
