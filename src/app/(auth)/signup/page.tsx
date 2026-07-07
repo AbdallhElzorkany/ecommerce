@@ -96,7 +96,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center px-4">
+    <div className="flex h-[calc(100vh-65px)] items-center justify-center px-4">
       <Card className="w-full max-w-sm">
         {isSuccess ? (
           <CardContent className="pt-6">

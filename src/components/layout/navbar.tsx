@@ -10,6 +10,8 @@ import {
   UserPlus,
   LogOut,
   LogIn,
+  Settings,
+  ShoppingBag,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,7 +26,7 @@ export default async function Navbar() {
   const isSignedIn = !!session?.user;
 
   return (
-    <header className="fixed top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-8">
         <div className="flex gap-6 md:gap-10">
           <Link href="/" className="flex items-center space-x-2">
@@ -91,11 +93,20 @@ export default async function Navbar() {
                 <>
                   <DropdownMenuItem asChild>
                     <Link
-                      href="/account"
+                      href="/account/settings"
                       className="w-full cursor-pointer flex items-center gap-2"
                     >
-                      <User className="h-4 w-4" />
-                      Account
+                      <Settings className="h-4 w-4" />
+                      Account 
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/account/orders"
+                      className="w-full cursor-pointer flex items-center gap-2"
+                    >
+                      <ShoppingBag className="h-4 w-4" />
+                      Orders
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
