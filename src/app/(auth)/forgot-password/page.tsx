@@ -21,7 +21,7 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   return (
     <div className="flex h-[calc(100vh-65px)] items-center justify-center px-4">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         {step === 4 ? (
           <CardContent className="pt-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">

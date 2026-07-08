@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import {
@@ -84,7 +83,6 @@ export default function SignupPage() {
 
   const onSubmit = async (data: SignupFormData) => {
     const res = await signupUser(data);
-    console.log(res);
     if (res?.message !== "success") {
       setError("root", {
         message: res.message,
@@ -97,7 +95,7 @@ export default function SignupPage() {
 
   return (
     <div className="flex h-[calc(100vh-65px)] items-center justify-center px-4">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         {isSuccess ? (
           <CardContent className="pt-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
@@ -128,14 +126,14 @@ export default function SignupPage() {
                 Enter your credentials to create your account
               </CardDescription>
             </CardHeader>
-            {errors.root && (
-              <div className="mb-2 flex items-center justify-center gap-1 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-                <CircleAlertIcon className="size-4 shrink-0" />
-                <span>{errors.root.message}</span>
-              </div>
-            )}
 
             <CardContent>
+              {errors.root && (
+                <div className="mb-2 flex items-center justify-center gap-1 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                  <CircleAlertIcon className="size-4 shrink-0" />
+                  <span>{errors.root.message}</span>
+                </div>
+              )}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldGroup>
                   {/* Name */}

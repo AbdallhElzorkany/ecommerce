@@ -18,7 +18,7 @@ const resetPasswordSchema = z.object({
     ),
 });
 
-export type resetPasswordFormData = z.infer<typeof resetPasswordSchema>;
+export type ResetPasswordFormData = z.infer<typeof resetPasswordSchema>;
 
 export default function StepThree({
   setStep,
@@ -32,7 +32,7 @@ export default function StepThree({
     handleSubmit,
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<resetPasswordFormData>({
+  } = useForm<ResetPasswordFormData>({
     resolver: zodResolver(resetPasswordSchema),
     defaultValues: {
       email: email,
@@ -40,9 +40,8 @@ export default function StepThree({
     mode: "onChange",
   });
 
-  const onSubmit = async (data: resetPasswordFormData) => {
+  const onSubmit = async (data: ResetPasswordFormData) => {
     const res = await resetPassword(data);
-    console.log(res);
     if (res?.statusMsg === "fail") {
       setError("root", {
         message: res.message,

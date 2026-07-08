@@ -69,7 +69,7 @@ export default function SigninPage() {
 
   return (
     <div className="flex h-[calc(100vh-65px)] items-center justify-center px-4">
-      <Card className="w-full max-w-sm">
+      <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-2xl font-bold tracking-tight text-center">
             Sign In
@@ -78,14 +78,14 @@ export default function SigninPage() {
             Enter your credentials to access your account
           </CardDescription>
         </CardHeader>
+
+        <CardContent>
         {errors.root && (
           <div className="mb-2 flex items-center justify-center gap-1 rounded-2xl  border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
             <CircleAlertIcon className="size-4 shrink-0" />
             <span>{errors.root.message}</span>
           </div>
         )}
-
-        <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
             <FieldGroup>
               {/* Email */}

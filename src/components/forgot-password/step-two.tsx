@@ -5,7 +5,7 @@ import { CircleAlertIcon } from "lucide-react";
 import { verifyResetCode } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
+import { Field, FieldError, FieldGroup } from "../ui/field";
 import {
   InputOTP,
   InputOTPGroup,
@@ -17,7 +17,7 @@ const verifyResetCodeSchema = z.object({
   resetCode: z.string().regex(/^[0-9]{6}$/, "Reset code must be 6 digits"),
 });
 
-export type verifyResetCodeFormData = z.infer<typeof verifyResetCodeSchema>;
+export type VerifyResetCodeFormData = z.infer<typeof verifyResetCodeSchema>;
 
 export default function StepTwo({
   setStep,
@@ -30,7 +30,7 @@ export default function StepTwo({
 
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<verifyResetCodeFormData>({
+  } = useForm<VerifyResetCodeFormData>({
     resolver: zodResolver(verifyResetCodeSchema),
     defaultValues: {
       resetCode: "",
@@ -38,9 +38,8 @@ export default function StepTwo({
     mode: "onChange",
   });
 
-  const onSubmit = async (data: verifyResetCodeFormData) => {
+  const onSubmit = async (data: VerifyResetCodeFormData) => {
     const res = await verifyResetCode(data);
-    console.log(res);
     if (res?.status !== "Success") {
       setError("root", {
         message: res.message,

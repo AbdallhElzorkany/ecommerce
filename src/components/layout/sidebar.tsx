@@ -26,7 +26,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <ShadcnSidebar className="top-16 h-[calc(100svh-4rem)] border-r">
+    <ShadcnSidebar className="top-16 h-[calc(100svh-4rem)] ">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Account Navigation</SidebarGroupLabel>
@@ -36,7 +36,7 @@ export function Sidebar() {
                 const isActive = pathname === item.href;
                 return (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton asChild isActive={isActive}>
+                    <SidebarMenuButton size={"lg"} asChild isActive={isActive}>
                       <Link href={item.href}>
                         <item.icon />
                         <span>{item.title}</span>

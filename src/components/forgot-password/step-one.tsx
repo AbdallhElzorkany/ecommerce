@@ -11,7 +11,7 @@ const forgotPasswordSchema = z.object({
   email: z.email("Please enter a valid email address"),
 });
 
-export type forgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
+export type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 export default function StepOne({
   setStep,
   setEmail,
@@ -25,7 +25,7 @@ export default function StepOne({
 
     formState: { errors, isSubmitting },
     setError,
-  } = useForm<forgotPasswordFormData>({
+  } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
       email: "",
@@ -33,9 +33,8 @@ export default function StepOne({
     mode: "onChange",
   });
 
-  const onSubmit = async (data: forgotPasswordFormData) => {
+  const onSubmit = async (data: ForgotPasswordFormData) => {
     const res = await forgotPassword(data);
-    console.log(res);
     if (res?.statusMsg !== "success") {
       setError("root", {
         message: res.message,

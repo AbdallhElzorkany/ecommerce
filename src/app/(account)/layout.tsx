@@ -12,12 +12,18 @@ export default async function AccountLayout({
   if (!session) redirect("/signin");
   
   return (
-    <SidebarProvider>
+    <SidebarProvider
+      style={{
+        "--sidebar-width": "16rem",
+        "--sidebar-width-icon": "3rem",
+        minHeight: "calc(100vh - 65px)"
+      } as React.CSSProperties}
+    >
       <Sidebar />
-      <SidebarInset>
+      <SidebarInset style={{ minHeight: "calc(100vh - 65px)" }}>
         <header className="flex h-14 items-center gap-2 border-b bg-background px-4 md:hidden">
-          <SidebarTrigger className="-ml-1" />
-          <Separator orientation="vertical" className="h-4" />
+          <SidebarTrigger className="cursor-pointer" />
+          <Separator orientation="vertical" className="h-14" />
           <span className="font-semibold text-sm">Account Menu</span>
         </header>
         <main className="flex-1 p-4 md:p-6 lg:p-8">
