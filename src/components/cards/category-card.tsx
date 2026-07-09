@@ -14,8 +14,10 @@ export function CategoryCard({ category }: CategoryCardProps) {
         <Image
           src={category.image}
           alt={category.name}
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-110"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-black/30 transition-colors group-hover:bg-black/50" />
         <div className="absolute inset-0 flex items-center justify-center p-4">

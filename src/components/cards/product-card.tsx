@@ -25,8 +25,8 @@ export function ProductCard({ product }: ProductCardProps) {
           alt={product.title}
           className="object-cover w-full h-full transition-transform hover:scale-105"
           loading="lazy"
-          width={500}
-          height={500}
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          fill
         />
       </Link>
       <CardHeader className="flex-1">
@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
         <p className="font-semibold text-lg">${product.price.toFixed(2)}</p>
       </CardContent>
       <CardFooter>
-          <Button className="w-full">Add to Cart</Button>
+        <Button className="w-full cursor-pointer">Add to Cart</Button>
       </CardFooter>
     </Card>
   );
