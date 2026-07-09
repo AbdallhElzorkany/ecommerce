@@ -29,10 +29,11 @@ export default async function BrandsPage({
           ))}
         </section>
       </section>
-
-      <section className="py-8">
-        <AppPagination metadata={brands.metadata} basePath="/brands" />
-      </section>
+      {brands.metadata.numberOfPages > 1 && (
+        <section className="py-8">
+          <AppPagination metadata={brands.metadata} basePath="/brands" />
+        </section>
+      )}
     </main>
   );
 }
