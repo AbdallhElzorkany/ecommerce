@@ -26,17 +26,17 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <ShadcnSidebar className="top-16 h-[calc(100svh-4rem)] ">
+    <ShadcnSidebar variant="floating" className="top-16 h-[calc(100svh-4rem)] ">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Account Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="space-y-2">
               {sidebarItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton size={"lg"} asChild isActive={isActive}>
+                    <SidebarMenuButton size={"lg"} variant={"outline"} asChild isActive={isActive}>
                       <Link href={item.href}>
                         <item.icon />
                         <span>{item.title}</span>
