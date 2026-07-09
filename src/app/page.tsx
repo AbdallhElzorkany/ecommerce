@@ -11,7 +11,7 @@ export default async function Home() {
     BrandsResponse,
     ProductsResponse,
   ] = await Promise.all([
-    (await fetch(`${process.env.API_URL}/api/v1/categories?limit=6`)).json(),
+    (await fetch(`${process.env.API_URL}/api/v1/categories?limit=4`)).json(),
     (await fetch(`${process.env.API_URL}/api/v1/brands?limit=6`)).json(),
     (
       await fetch(
@@ -36,7 +36,7 @@ export default async function Home() {
             View All
           </Link>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {categories.data?.map((category: Category) => (
             <CategoryCard key={category._id} category={category} />
           ))}

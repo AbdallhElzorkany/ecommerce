@@ -16,3 +16,6 @@ export interface Brand {
   slug: string;
   image: string;
 }
+export interface BrandResponse {
+  data: Brand;
+}
