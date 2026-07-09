@@ -1,6 +1,7 @@
 import { BrandCard } from "@/components/cards/brand-card";
 import { Brand, BrandsResponse } from "@/types/brand";
 import { AppPagination } from "@/components/ui/app-pagination";
+import { XCircle } from "lucide-react";
 
 export default async function BrandsPage({
   searchParams,
@@ -24,9 +25,16 @@ export default async function BrandsPage({
         </section>
 
         <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {brands.data.map((brand: Brand) => (
-            <BrandCard key={brand._id} brand={brand} />
-          ))}
+          {brands.data.length === 0 ? (
+            <div className="col-span-full gap-5 h-[50vh] flex flex-col items-center justify-center py-5">
+              <XCircle className="w-12 h-12" />
+              <p className="text-muted-foreground text-2xl">No brands found</p>
+            </div>
+          ) : (
+            brands.data.map((brand: Brand) => (
+              <BrandCard key={brand._id} brand={brand} />
+            ))
+          )}
         </section>
       </section>
       {brands.metadata.numberOfPages > 1 && (

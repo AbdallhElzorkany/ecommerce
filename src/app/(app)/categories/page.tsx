@@ -1,6 +1,7 @@
 import { CategoryCard } from "@/components/cards/category-card";
 import { AppPagination } from "@/components/ui/app-pagination";
 import { CategoriesResponse, Category } from "@/types/category";
+import { XCircle } from "lucide-react";
 export default async function CategoriesPage({
   searchParams,
 }: {
@@ -23,9 +24,18 @@ export default async function CategoriesPage({
         </section>
 
         <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {categories.data.map((category: Category) => (
-            <CategoryCard key={category._id} category={category} />
-          ))}
+          {categories.data.length === 0 ? (
+            <div className="col-span-full gap-5 h-[50vh] flex flex-col items-center justify-center py-5">
+              <XCircle className="w-12 h-12" />
+              <p className="text-muted-foreground text-2xl">
+                No categories found
+              </p>
+            </div>
+          ) : (
+            categories.data.map((category: Category) => (
+              <CategoryCard key={category._id} category={category} />
+            ))
+          )}
         </section>
       </section>
 
