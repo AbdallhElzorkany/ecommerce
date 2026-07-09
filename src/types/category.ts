@@ -15,3 +15,6 @@ export interface Category {
   slug: string;
   image: string;
 }
+export interface CategoryResponse {
+  data: Category;
+}

@@ -19,7 +19,7 @@ export default async function Page({
     await Promise.all([
       (await fetch(`${process.env.API_URL}/api/v1/brands/${id}`)).json(),
       (
-        await fetch(`${process.env.API_URL}/api/v1/products?brand=${id}&page=${pageNumber}`)
+        await fetch(`${process.env.API_URL}/api/v1/products?brand=${id}&page=${pageNumber}&limit=12`)
       ).json(),
     ]);
   return (

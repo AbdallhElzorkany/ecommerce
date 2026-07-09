@@ -12,7 +12,7 @@ export default async function ProductsPage({
   const pageNumber = page ? parseInt(page as string) : 1;
   const products: ProductsResponse = await (
     await fetch(
-      `${process.env.API_URL}/api/v1/products?limit=24&page=${pageNumber}`,
+      `${process.env.API_URL}/api/v1/products?limit=20&page=${pageNumber}`,
     )
   ).json();
 
