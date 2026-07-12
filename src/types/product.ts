@@ -16,12 +16,7 @@ export interface ProductsResponse {
 export interface Product {
   sold: number;
   images: string[];
-  subcategory: {
-    _id: string;
-    name: string;
-    slug: string;
-    category: string;
-  }[];
+  subcategory: Subcategory[];
   ratingsQuantity: number;
   _id: string;
   title: string;
@@ -37,4 +32,30 @@ export interface Product {
   createdAt: string;
   updatedAt: string;
   id: string;
+  __v?: number;
+  reviews?: Review[];
+}
+
+export interface Review {
+  _id: string;
+  review: string;
+  rating: number;
+  product: string;
+  user: User;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+export interface User {
+  _id: string;
+  name: string;
+}
+export interface Subcategory {
+  _id: string;
+  name: string;
+  slug: string;
+  category: string;
+}
+export interface ProductResponse {
+  data: Product;
 }
