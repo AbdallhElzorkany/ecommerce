@@ -18,6 +18,8 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Star, ShoppingCart, Heart } from "lucide-react";
 import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import AddToCartButton from "@/components/ui/addToCartButton";
 
 export default async function Page({
   params,
@@ -29,9 +31,9 @@ export default async function Page({
 
   if (!res.ok) {
     return (
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-gray-900">Product not found</h1>
-        <p className="text-gray-500 mt-2">
+      <div className="min-h-[calc(100vh-65px)] flex flex-col justify-center items-center">
+        <h1 className="text-2xl font-bold">Product not found</h1>
+        <p className="mt-2">
           The product you are looking for does not exist or has been removed.
         </p>
       </div>
@@ -71,7 +73,7 @@ export default async function Page({
           )}
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage className="font-medium text-gray-900">
+            <BreadcrumbPage className="font-medium text-primary">
               {product.title}
             </BreadcrumbPage>
           </BreadcrumbItem>
@@ -82,11 +84,11 @@ export default async function Page({
         {/* Images section */}
         <div className="w-full flex justify-center">
           {images.length > 0 ? (
-            <Carousel className="w-full max-w-md">
+            <Carousel className="w-full max-w-lg">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="aspect-square relative overflow-hidden rounded-2xl bg-gray-50 border border-gray-100 shadow-sm">
+                    <div className="aspect-square relative overflow-hidden rounded-2xl bg-primary shadow-sm">
                       <Image
                         src={image}
                         alt={`${product.title} - Image ${index + 1}`}
@@ -99,8 +101,8 @@ export default async function Page({
               </CarouselContent>
               {images.length > 1 && (
                 <>
-                  <CarouselPrevious className="left-4 bg-white/80 hover:bg-white border-none shadow-md backdrop-blur-sm" />
-                  <CarouselNext className="right-4 bg-white/80 hover:bg-white border-none shadow-md backdrop-blur-sm" />
+                  <CarouselPrevious className="left-4 cursor-pointer" variant="secondary" size="lg"/>
+                  <CarouselNext className="right-2 cursor-pointer" variant="secondary" size="lg"/>
                 </>
               )}
             </Carousel>
@@ -116,15 +118,13 @@ export default async function Page({
         {/* Product Info Section */}
         <div className="flex flex-col space-y-8">
           <div>
-            <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 leading-tight">
+            <h1 className="text-4xl font-extrabold tracking-tight leading-tight">
               {product.title}
             </h1>
             {product.brand && (
-              <p className="text-lg text-gray-500 mt-3 font-medium">
+              <p className="text-lg mt-3 font-medium">
                 Brand:{" "}
-                <span className="font-semibold text-gray-900">
-                  {product.brand.name}
-                </span>
+                <span className="font-semibold">{product.brand.name}</span>
               </p>
             )}
 
@@ -136,46 +136,23 @@ export default async function Page({
                 </span>
               </div>
               <Separator orientation="vertical" className="h-6" />
-              <span className="text-sm font-medium text-gray-600 hover:text-gray-900 cursor-pointer transition-colors">
+              <span className="text-sm font-medium cursor-pointer transition-colors">
                 {product.ratingsQuantity} reviews
               </span>
               <Separator orientation="vertical" className="h-6" />
-              <span className="text-sm font-medium text-gray-600">
-                {product.sold} sold
-              </span>
+              <span className="text-sm font-medium">{product.sold} sold</span>
             </div>
           </div>
 
           <div className="flex items-baseline space-x-2">
-            <span className="text-5xl font-black text-gray-900">
+            <span className="text-5xl font-black">
               ${product.price.toFixed(2)}
             </span>
           </div>
 
-          <p className="text-gray-600 leading-relaxed text-lg">
-            {product.description}
-          </p>
+          <p className="leading-relaxed text-lg">{product.description}</p>
 
           <Separator />
-
-          {product.availableColors && product.availableColors.length > 0 && (
-            <div>
-              <h3 className="text-sm font-bold tracking-wider text-gray-900 uppercase mb-4">
-                Available Colors
-              </h3>
-              <div className="flex items-center space-x-3">
-                {product.availableColors.map((color, index) => (
-                  <button
-                    key={index}
-                    className="w-10 h-10 rounded-full border-2 border-gray-200 shadow-sm transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900"
-                    style={{ backgroundColor: color }}
-                    title={color}
-                    aria-label={`Select color ${color}`}
-                  />
-                ))}
-              </div>
-            </div>
-          )}
 
           <div className="pt-2">
             <span
@@ -192,19 +169,13 @@ export default async function Page({
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button
-              size="lg"
-              className="flex-1 h-14 text-lg font-semibold gap-2 shadow-lg hover:shadow-xl transition-all cursor-pointer"
-              disabled={product.quantity === 0}
-            >
-              <ShoppingCart className="w-5 h-5" />
-              Add to Cart
-            </Button>
+            {product.quantity > 0 && (
+              <AddToCartButton Id={product.id} quantity={product.quantity} />
+            )}
             <Button
               size="lg"
               variant="secondary"
               className="flex-1 h-14 text-lg font-semibold gap-2 border-2 border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
-              disabled={product.quantity === 0}
             >
               <Heart className="w-5 h-5" />
               Add to Wishlist
@@ -217,22 +188,22 @@ export default async function Page({
       {product.reviews && product.reviews.length > 0 && (
         <div className="mt-24 max-w-4xl">
           <Separator className="mb-12" />
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 mb-8">
+          <h2 className="text-3xl font-bold tracking-tight mb-8">
             Customer Reviews
           </h2>
           <div className="space-y-8">
-            {product.reviews.map((review) => (
-              <div
+            {product.reviews.toReversed().map((review) => (
+              <Card
                 key={review._id}
-                className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm"
+                className=" p-6 rounded-2xl shadow-sm"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
-                    <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 font-bold mr-4">
+                    <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold mr-4">
                       {(review.user?.name || "A")[0].toUpperCase()}
                     </div>
                     <div>
-                      <span className="font-semibold text-gray-900 block">
+                      <span className="font-semibold block">
                         {review.user?.name || "Anonymous User"}
                       </span>
                       <div className="flex items-center mt-1">
@@ -253,10 +224,10 @@ export default async function Page({
                     })}
                   </span>
                 </div>
-                <p className="text-gray-700 leading-relaxed ml-14">
+                <p className="leading-relaxed ml-14">
                   {review.review}
                 </p>
-              </div>
+              </Card>
             ))}
           </div>
         </div>

@@ -16,7 +16,7 @@ export function BrandCard({ brand }: BrandCardProps) {
             src={brand.image}
             alt={brand.name}
             fill
-            className="object-contain transition-transform duration-300 group-hover:scale-110"
+            className="object-contain dark:invert-100 transition-transform duration-300 group-hover:scale-110"
             loading="lazy"
             sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
           />

@@ -1,3 +1,4 @@
+"use client";
 import { Product } from "@/types/product";
 import Image from "next/image";
 import {
@@ -9,11 +10,15 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { addToCart } from "@/redux/slices/cartSlice";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "@/redux/store";
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const dispatch = useDispatch<AppDispatch>();
   return (
     <Card className="flex flex-col h-full overflow-hidden pt-0">
       <Link
@@ -40,7 +45,13 @@ export function ProductCard({ product }: ProductCardProps) {
         <p className="font-semibold text-lg">${product.price.toFixed(2)}</p>
       </CardContent>
       <CardFooter>
-        <Button className="w-full cursor-pointer">Add to Cart</Button>
+        <Button
+          className="w-full cursor-pointer"
+          size="lg"
+          onClick={() => dispatch(addToCart(product.id))}
+        >
+          Add to Cart
+        </Button>
       </CardFooter>
     </Card>
   );

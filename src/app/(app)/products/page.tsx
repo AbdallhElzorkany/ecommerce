@@ -24,7 +24,7 @@ export default async function ProductsPage({
           <p>Discover all products available in our shop.</p>
         </section>
 
-        <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {products.data.length === 0 ? (
             <div className="col-span-full gap-5 h-[50vh] flex flex-col items-center justify-center py-5">
               <XCircle className="w-12 h-12" />

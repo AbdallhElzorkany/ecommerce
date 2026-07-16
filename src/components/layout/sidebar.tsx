@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin, ShoppingBag, Settings, Shield } from "lucide-react";
+import { MapPin, ShoppingBag, Settings, Shield, Heart, ShoppingCart } from "lucide-react";
 
 import {
   Sidebar as ShadcnSidebar,
@@ -16,9 +16,11 @@ import {
 } from "@/components/ui/sidebar";
 
 const sidebarItems = [
-  { title: "Settings", href: "/account/settings", icon: Settings },
+  { title: "Cart", href: "/account/cart", icon: ShoppingCart },
+  { title: "Wishlist", href: "/account/wishlist", icon: Heart },
   { title: "Orders", href: "/account/orders", icon: ShoppingBag },
   { title: "Addresses", href: "/account/addresses", icon: MapPin },
+  { title: "Settings", href: "/account/settings", icon: Settings },
   { title: "Security", href: "/account/security", icon: Shield },
 ];
 
@@ -26,7 +28,7 @@ export function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <ShadcnSidebar variant="floating" className="top-16 h-[calc(100svh-4rem)] ">
+    <ShadcnSidebar className="top-16 h-[calc(100svh-4rem)]">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Account Navigation</SidebarGroupLabel>

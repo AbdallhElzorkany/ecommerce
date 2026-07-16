@@ -21,6 +21,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import CartButton from "../ui/cartButton";
 export default async function Navbar() {
   const session = await auth();
   const isSignedIn = !!session?.user;
@@ -63,17 +64,12 @@ export default async function Navbar() {
           {isSignedIn && (
             <>
               <Button variant="ghost" size="icon" asChild>
-                <Link href="/wishlist" title="Wishlist">
+                <Link href="/account/wishlist" title="Wishlist">
                   <Heart className="size-5" />
                   <span className="sr-only">Wishlist</span>
                 </Link>
               </Button>
-              <Button variant="ghost" size="icon" asChild>
-                <Link href="/cart" title="Cart">
-                  <ShoppingCart className="size-5" />
-                  <span className="sr-only">Cart</span>
-                </Link>
-              </Button>
+              <CartButton />
             </>
           )}
           <DropdownMenu>
@@ -97,7 +93,7 @@ export default async function Navbar() {
                       className="w-full cursor-pointer flex items-center gap-2"
                     >
                       <Settings className="h-4 w-4" />
-                      Account 
+                      Account
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>

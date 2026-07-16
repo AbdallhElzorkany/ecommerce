@@ -10,7 +10,6 @@ export default async function AccountLayout({
 }) {
   const session = await auth();
   if (!session) redirect("/signin");
-  
   return (
     <SidebarProvider
       style={{
