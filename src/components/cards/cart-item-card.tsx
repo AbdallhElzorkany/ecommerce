@@ -31,6 +31,7 @@ export function CartItemCard({
           alt={product.title}
           fill
           className="object-cover"
+          loading="lazy"
           sizes="96px"
         />
       </Link>

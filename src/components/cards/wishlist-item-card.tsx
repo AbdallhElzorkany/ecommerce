@@ -26,6 +26,7 @@ export function WishlistItemCard({ product, onRemove }: WishlistItemCardProps) {
           fill
           className="object-cover"
           sizes="96px"
+          loading="lazy"
         />
       </Link>
 

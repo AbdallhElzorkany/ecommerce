@@ -95,6 +95,7 @@ export default async function Page({
                         alt={`${product.title} - Image ${index + 1}`}
                         fill
                         className="object-cover"
+                        loading="lazy"
                       />
                     </div>
                   </CarouselItem>
