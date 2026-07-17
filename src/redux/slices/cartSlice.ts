@@ -1,12 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { CartResponse, Cart } from "@/types/cart";
-import { getSession } from "next-auth/react";
 import { toast } from "sonner";
-// ─── Helper ──────────────────────────────────────────────────────────────────
-async function authHeaders() {
-  const session = await getSession();
-  return { token: session?.accessToken ?? "" };
-}
+import { authHeaders } from "@/lib/helpers";
 
 const BASE = "https://ecommerce.routemisr.com/api/v2";
 
@@ -113,9 +108,7 @@ const cartSlice = createSlice({
           if (action.payload.data) {
             state.cart = action.payload.data;
           }
-          if (action.payload.status === "success") {
-            toast.success(action.payload.message);
-          } else {
+          if (action.payload.status !== "success") {
             toast.error(action.payload.message);
           }
         },

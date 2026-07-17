@@ -12,10 +12,10 @@ import {
 
 import { AppDispatch, RootState } from "@/redux/store";
 import {
-  retrieveCart,
   removeCartItem,
   updateCartItemCount,
   clearCart,
+  clearError,
 } from "@/redux/slices/cartSlice";
 
 import { Button } from "@/components/ui/button";
@@ -37,7 +37,6 @@ export default function CartPage() {
     (state: RootState) => state.cart,
   );
   const [clearConfirm, setClearConfirm] = useState(false);
-
 
   const handleRemove = useCallback(
     (productId: string) => {
@@ -64,6 +63,13 @@ export default function CartPage() {
     setClearConfirm(false);
   }, [clearConfirm, dispatch]);
 
+  useEffect(() => {
+    if (error) {
+      const t = setTimeout(() => dispatch(clearError()), 4000);
+      return () => clearTimeout(t);
+    }
+  }, [error, dispatch]);
+
   const handleCheckout = useCallback(() => {
     router.push("/account/checkout");
   }, [router]);
@@ -80,8 +86,7 @@ export default function CartPage() {
             Your Cart
             {cart.products.length > 0 && (
               <span className="ml-2 text-base font-medium text-muted-foreground">
-                ({totalProducts}{" "}
-                {totalProducts === 1 ? "product" : "products"})
+                ({totalProducts} {totalProducts === 1 ? "product" : "products"})
               </span>
             )}
           </h1>
@@ -93,6 +98,7 @@ export default function CartPage() {
             size="sm"
             className="gap-2 cursor-pointer transition-all"
             onClick={handleClearCart}
+            disabled={loading}
             id="clear-cart-btn"
           >
             <Trash2 className="size-4" />
@@ -189,7 +195,7 @@ export default function CartPage() {
                 size="lg"
                 className="w-full gap-2 cursor-pointer text-base font-semibold disabled:cursor-not-allowed"
                 onClick={handleCheckout}
-                disabled={cart.products.length === 0}
+                disabled={loading || cart.products.length === 0}
                 id="checkout-btn"
               >
                 Proceed to Checkout

@@ -12,6 +12,8 @@ import {
   LogIn,
   Settings,
   ShoppingBag,
+  MapPin,
+  Shield,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -22,6 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import CartButton from "../ui/cartButton";
+import WishlistButton from "../ui/wishlistButton";
 export default async function Navbar() {
   const session = await auth();
   const isSignedIn = !!session?.user;
@@ -63,12 +66,7 @@ export default async function Navbar() {
         <div className="flex items-center justify-end space-x-2">
           {isSignedIn && (
             <>
-              <Button variant="ghost" size="icon" asChild>
-                <Link href="/account/wishlist" title="Wishlist">
-                  <Heart className="size-5" />
-                  <span className="sr-only">Wishlist</span>
-                </Link>
-              </Button>
+              <WishlistButton />
               <CartButton />
             </>
           )}
@@ -89,15 +87,6 @@ export default async function Navbar() {
                 <>
                   <DropdownMenuItem asChild>
                     <Link
-                      href="/account/settings"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <Settings className="h-4 w-4" />
-                      Account
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
                       href="/account/orders"
                       className="w-full cursor-pointer flex items-center gap-2"
                     >
@@ -105,24 +94,50 @@ export default async function Navbar() {
                       Orders
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
-                    <form
-                      action={async () => {
-                        "use server";
-                        await signOut();
-                      }}
-                      className="w-full"
+                    <Link
+                      href="/account/addresses"
+                      className="w-full cursor-pointer flex items-center gap-2"
                     >
-                      <button
-                        type="submit"
-                        className="w-full text-left cursor-pointer flex items-center gap-2"
-                      >
-                        <LogOut className="h-4 w-4" />
-                        Sign Out
-                      </button>
-                    </form>
+                      <MapPin className="h-4 w-4" />
+                      Addresses
+                    </Link>
                   </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/account/security"
+                      className="w-full cursor-pointer flex items-center gap-2"
+                    >
+                      <Shield className="h-4 w-4" />
+                      Security
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link
+                      href="/account/settings"
+                      className="w-full cursor-pointer flex items-center gap-2"
+                    >
+                      <Settings className="h-4 w-4" />
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <form
+                    action={async () => {
+                      "use server";
+                      await signOut();
+                    }}
+                    className="w-full"
+                  >
+                    <Button
+                      variant="destructive"
+                      type="submit"
+                      className="w-full text-left cursor-pointer flex items-center gap-2"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Sign Out
+                    </Button>
+                  </form>
                 </>
               ) : (
                 <>

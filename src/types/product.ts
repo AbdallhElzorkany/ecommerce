@@ -24,7 +24,6 @@ export interface Product {
   description: string;
   quantity: number;
   price: number;
-  availableColors: string[];
   imageCover: string;
   category: Category;
   brand: Brand;

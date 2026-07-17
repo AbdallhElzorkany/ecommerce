@@ -19,7 +19,6 @@ export default async function Home() {
       )
     ).json(),
   ]);
-  console.log(categories, brands, products);
   return (
     <main className="container p-5 mx-auto space-y-4">
       <section className="py-5 space-y-5">

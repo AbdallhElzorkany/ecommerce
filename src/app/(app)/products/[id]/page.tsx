@@ -16,10 +16,11 @@ import {
 } from "@/components/ui/carousel";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Star, ShoppingCart, Heart } from "lucide-react";
+import { Star, Heart } from "lucide-react";
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import AddToCartButton from "@/components/ui/addToCartButton";
+import AddToWishlistButton from "@/components/ui/addToWishlistButton";
 
 export default async function Page({
   params,
@@ -101,8 +102,16 @@ export default async function Page({
               </CarouselContent>
               {images.length > 1 && (
                 <>
-                  <CarouselPrevious className="left-4 cursor-pointer" variant="secondary" size="lg"/>
-                  <CarouselNext className="right-2 cursor-pointer" variant="secondary" size="lg"/>
+                  <CarouselPrevious
+                    className="left-4 cursor-pointer"
+                    variant="secondary"
+                    size="lg"
+                  />
+                  <CarouselNext
+                    className="right-2 cursor-pointer"
+                    variant="secondary"
+                    size="lg"
+                  />
                 </>
               )}
             </Carousel>
@@ -130,7 +139,7 @@ export default async function Page({
 
             <div className="flex items-center mt-5 space-x-4">
               <div className="flex items-center bg-yellow-50 px-3 py-1 rounded-full">
-                <Star className="w-5 h-5 fill-yellow-500 text-yellow-500" />
+                <Star className="size-5 fill-yellow-500 text-yellow-500" />
                 <span className="ml-1.5 font-bold text-yellow-700">
                   {product.ratingsAverage}
                 </span>
@@ -170,16 +179,15 @@ export default async function Page({
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             {product.quantity > 0 && (
-              <AddToCartButton Id={product.id} quantity={product.quantity} />
+              <AddToCartButton
+                Id={product.id}
+                quantity={product.quantity}
+                height="h-14"
+                size="lg"
+                textSize="text-lg"
+              />
             )}
-            <Button
-              size="lg"
-              variant="secondary"
-              className="flex-1 h-14 text-lg font-semibold gap-2 border-2 border-gray-200 hover:border-gray-300 transition-all cursor-pointer"
-            >
-              <Heart className="w-5 h-5" />
-              Add to Wishlist
-            </Button>
+            <AddToWishlistButton product={product} />
           </div>
         </div>
       </div>
@@ -193,10 +201,7 @@ export default async function Page({
           </h2>
           <div className="space-y-8">
             {product.reviews.toReversed().map((review) => (
-              <Card
-                key={review._id}
-                className=" p-6 rounded-2xl shadow-sm"
-              >
+              <Card key={review._id} className=" p-6 rounded-2xl shadow-sm">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
                     <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold mr-4">
@@ -224,9 +229,7 @@ export default async function Page({
                     })}
                   </span>
                 </div>
-                <p className="leading-relaxed ml-14">
-                  {review.review}
-                </p>
+                <p className="leading-relaxed ml-14">{review.review}</p>
               </Card>
             ))}
           </div>

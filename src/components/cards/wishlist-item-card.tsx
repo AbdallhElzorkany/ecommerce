@@ -1,24 +1,18 @@
 "use client";
 
 import Image from "next/image";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CartProduct } from "@/types/cart";
+import AddToCartButton from "../ui/addToCartButton";
+import { Product } from "@/types/product";
 import Link from "next/link";
 
-interface CartItemCardProps {
-  item: CartProduct;
+interface WishlistItemCardProps {
+  product: Product;
   onRemove: (id: string) => void;
-  onUpdateCount: (id: string, count: number) => void;
 }
 
-export function CartItemCard({
-  item,
-  onRemove,
-  onUpdateCount,
-}: CartItemCardProps) {
-  const { product, count, price } = item;
-
+export function WishlistItemCard({ product, onRemove }: WishlistItemCardProps) {
   return (
     <div className="flex items-start gap-4 rounded-3xl bg-card p-4 shadow-sm ring-1 ring-foreground/5 transition-opacity">
       {/* Product image */}
@@ -61,53 +55,27 @@ export function CartItemCard({
             size="icon-sm"
             className="shrink-0 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors cursor-pointer "
             onClick={() => onRemove(product.id)}
-            aria-label={`Remove ${product.title} from cart`}
-            id={`remove-cart-item-${product.id}`}
+            aria-label={`Remove ${product.title} from wishlist`}
+            id={`remove-wishlist-item-${product.id}`}
           >
             <Trash2 className="size-4" />
           </Button>
         </div>
 
-        {/* Price + Quantity */}
+        {/* Price + add to cart button */}
         <div className="flex items-center justify-between gap-4 mt-1">
           <div>
-            <p className="text-base font-bold">${(price * count).toFixed(2)}</p>
-            {count > 1 && (
-              <p className="text-xs text-muted-foreground">
-                ${price.toFixed(2)} each
-              </p>
-            )}
+            <p className="text-base font-bold">${product.price.toFixed(2)}</p>
           </div>
 
-          {/* Quantity controls */}
-          <div className="flex items-center gap-2 rounded-full border border-border bg-background px-1 py-0.5">
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              className="rounded-full cursor-pointer"
-              onClick={() => onUpdateCount(product.id, count - 1)}
-              disabled={count <= 1}
-              aria-label="Decrease quantity"
-              id={`decrease-qty-${product.id}`}
-            >
-              <Minus className="size-3" />
-            </Button>
-
-            <span className="w-6 text-center text-sm font-semibold select-none">
-              {count}
-            </span>
-
-            <Button
-              variant="ghost"
-              size="icon-xs"
-              className="rounded-full cursor-pointer"
-              onClick={() => onUpdateCount(product.id, count + 1)}
-              disabled={count >= product.quantity}
-              aria-label="Increase quantity"
-              id={`increase-qty-${product.id}`}
-            >
-              <Plus className="size-3" />
-            </Button>
+          {/* Add to cart button */}
+          <div>
+            <AddToCartButton
+              Id={product.id}
+              quantity={product.quantity}
+              size="sm"
+              textSize="text-sm"
+            />
           </div>
         </div>
       </div>
