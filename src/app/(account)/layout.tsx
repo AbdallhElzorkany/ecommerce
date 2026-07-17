@@ -9,7 +9,6 @@ export default async function AccountLayout({
   children: React.ReactNode;
 }) {
   const session = await auth();
-  console.log(session);
   if (!session) redirect("/signin");
   return (
     <SidebarProvider
