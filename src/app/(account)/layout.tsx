@@ -1,7 +1,11 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { Sidebar } from "@/components/layout/sidebar";
-import { SidebarProvider, SidebarTrigger, SidebarInset } from "@/components/ui/sidebar";
+import {
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarInset,
+} from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 export default async function AccountLayout({
   children,
@@ -12,11 +16,13 @@ export default async function AccountLayout({
   if (!session) redirect("/signin");
   return (
     <SidebarProvider
-      style={{
-        "--sidebar-width": "16rem",
-        "--sidebar-width-icon": "3rem",
-        minHeight: "calc(100vh - 65px)"
-      } as React.CSSProperties}
+      style={
+        {
+          "--sidebar-width": "16rem",
+          "--sidebar-width-icon": "3rem",
+          minHeight: "calc(100vh - 65px)",
+        } as React.CSSProperties
+      }
     >
       <Sidebar />
       <SidebarInset style={{ minHeight: "calc(100vh - 65px)" }}>
@@ -25,9 +31,7 @@ export default async function AccountLayout({
           <Separator orientation="vertical" className="h-14" />
           <span className="font-semibold text-sm">Account Menu</span>
         </header>
-        <main className="flex-1 p-4 md:p-6 lg:p-8">
-          {children}
-        </main>
+        <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );

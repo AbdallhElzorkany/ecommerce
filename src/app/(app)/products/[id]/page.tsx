@@ -1,4 +1,4 @@
-import { ProductResponse } from "@/types/product";
+import { ProductResponse, ReviewsResponse } from "@/types/product";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,13 +14,15 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { Star, Heart } from "lucide-react";
+import { Star } from "lucide-react";
 import Image from "next/image";
-import { Card } from "@/components/ui/card";
 import AddToCartButton from "@/components/ui/addToCartButton";
 import AddToWishlistButton from "@/components/ui/addToWishlistButton";
+import ReviewCard from "@/components/cards/review-card";
+import { auth } from "@/lib/auth";
+import AddReviewForm from "@/components/reviews/addReviewForm";
+
 
 export default async function Page({
   params,
@@ -28,9 +30,13 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const res = await fetch(`${process.env.API_URL}/api/v1/products/${id}`);
+  const [productReq, reviewsReq, session] = await Promise.all([
+    fetch(`${process.env.API_URL}/api/v1/products/${id}`),
+    fetch(`${process.env.API_URL}/api/v1/products/${id}/reviews`),
+    auth(),
+  ]);
 
-  if (!res.ok) {
+  if (!productReq.ok) {
     return (
       <div className="min-h-[calc(100vh-65px)] flex flex-col justify-center items-center">
         <h1 className="text-2xl font-bold">Product not found</h1>
@@ -41,8 +47,10 @@ export default async function Page({
     );
   }
 
-  const productResponse = (await res.json()) as ProductResponse;
+  const productResponse = (await productReq.json()) as ProductResponse;
+  const reviewsResponse = (await reviewsReq.json()) as ReviewsResponse;
   const product = productResponse.data;
+  const reviews = reviewsResponse.data;
 
   const images =
     product.images?.length > 0
@@ -83,17 +91,18 @@ export default async function Page({
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
         {/* Images section */}
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center h-fit relative">
           {images.length > 0 ? (
-            <Carousel className="w-full max-w-lg">
+            <Carousel opts={{ loop: true }} className="w-full max-w-lg ">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
-                    <div className="aspect-square relative overflow-hidden rounded-2xl bg-primary shadow-sm">
+                    <div className="aspect-square relative overflow-hidden rounded-2xl bg-primary shadow-sm cursor-grab">
                       <Image
                         src={image}
                         alt={`${product.title} - Image ${index + 1}`}
                         fill
+                        sizes=""
                         className="object-cover"
                         loading="lazy"
                       />
@@ -105,12 +114,12 @@ export default async function Page({
                 <>
                   <CarouselPrevious
                     className="left-4 cursor-pointer"
-                    variant="secondary"
+                    variant="destructive"
                     size="lg"
                   />
                   <CarouselNext
                     className="right-2 cursor-pointer"
-                    variant="secondary"
+                    variant="destructive"
                     size="lg"
                   />
                 </>
@@ -194,48 +203,38 @@ export default async function Page({
       </div>
 
       {/* Reviews Section */}
-      {product.reviews && product.reviews.length > 0 && (
-        <div className="mt-24 max-w-4xl">
-          <Separator className="mb-12" />
-          <h2 className="text-3xl font-bold tracking-tight mb-8">
-            Customer Reviews
-          </h2>
+
+      <div className="pt-24">
+        <Separator className="mb-12" />
+        <h2 className="text-3xl font-bold tracking-tight mb-8">
+          Customer Reviews{" "}
+          <span className="text-muted-foreground">
+            ({reviewsResponse?.results})
+          </span>
+        </h2>
+        <Separator className="mb-12" />
+        <AddReviewForm productId={product.id} token={session?.accessToken} />
+        <Separator className="my-12" />
+        {reviews && reviews.length > 0 ? (
           <div className="space-y-8">
-            {product.reviews.toReversed().map((review) => (
-              <Card key={review._id} className=" p-6 rounded-2xl shadow-sm">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 bg-background rounded-full flex items-center justify-center font-bold mr-4">
-                      {(review.user?.name || "A")[0].toUpperCase()}
-                    </div>
-                    <div>
-                      <span className="font-semibold block">
-                        {review.user?.name || "Anonymous User"}
-                      </span>
-                      <div className="flex items-center mt-1">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "fill-gray-200 text-gray-200"}`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <span className="text-sm text-gray-500">
-                    {new Date(review.createdAt).toLocaleDateString(undefined, {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                  </span>
-                </div>
-                <p className="leading-relaxed ml-14">{review.review}</p>
-              </Card>
+            {reviews.map((review) => (
+              <ReviewCard
+                key={review._id}
+                review={review}
+                token={session?.accessToken}
+              />
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <p className="text-center text-muted-foreground bg-primary/5 ring-1 ring-border py-8 rounded-2xl flex items-center justify-center flex-col gap-2">
+            <Star className="text-muted-foreground size-10" />
+            No reviews yet.
+            <span className="text-sm text-muted-foreground">
+              Be the first to review this product!
+            </span>
+          </p>
+        )}
+      </div>
     </div>
   );
 }

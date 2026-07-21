@@ -43,7 +43,17 @@ export interface Review {
   user: User;
   createdAt: string;
   updatedAt: string;
-  __v: number;
+}
+export interface ReviewsResponse {
+  results: number;
+  metadata: {
+    currentPage: number;
+    numberOfPages: number;
+    limit: number;
+    nextPage?: number;
+    prevPage?: number;
+  };
+  data: Review[];
 }
 export interface User {
   _id: string;
