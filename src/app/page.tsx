@@ -30,7 +30,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold">Categories</h2>
           <Link
             href="/categories"
-            className="text-gray-600 hover:text-black transition-colors"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
             View All
           </Link>
@@ -46,7 +46,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold">Brands</h2>
           <Link
             href="/brands"
-            className="text-gray-600 hover:text-black transition-colors"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
             View All
           </Link>
@@ -62,7 +62,7 @@ export default async function Home() {
           <h2 className="text-2xl font-bold">Products</h2>
           <Link
             href="/products"
-            className="text-gray-600 hover:text-black transition-colors"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
             View All
           </Link>
