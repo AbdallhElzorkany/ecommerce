@@ -20,7 +20,6 @@ const sidebarItems = [
   { title: "Wishlist", href: "/account/wishlist", icon: Heart },
   { title: "Orders", href: "/account/orders", icon: ShoppingBag },
   { title: "Addresses", href: "/account/addresses", icon: MapPin },
-  { title: "Settings", href: "/account/settings", icon: Settings },
   { title: "Security", href: "/account/security", icon: Shield },
 ];
 

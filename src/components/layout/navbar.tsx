@@ -25,6 +25,20 @@ import {
 } from "@/components/ui/dropdown-menu";
 import CartButton from "../ui/cartButton";
 import WishlistButton from "../ui/wishlistButton";
+const accountDropdownContent = [
+  { title: "Orders", href: "/account/orders", icon: ShoppingBag },
+  { title: "Addresses", href: "/account/addresses", icon: MapPin },
+  { title: "Security", href: "/account/security", icon: Shield },
+];
+const signInDropdownContent = [
+  { title: "Sign In", href: "/signin", icon: LogIn },
+  { title: "Sign Up", href: "/signup", icon: UserPlus },
+];
+const navLinks = [
+  { title: "Brands", href: "/brands", icon: Store },
+  { title: "Categories", href: "/categories", icon: LayoutGrid },
+  { title: "Products", href: "/products", icon: PackageSearch },
+];
 export default async function Navbar() {
   const session = await auth();
   const isSignedIn = !!session?.user;
@@ -40,27 +54,16 @@ export default async function Navbar() {
             </span>
           </Link>
           <nav className="hidden md:flex gap-6">
-            <Link
-              href="/brands"
-              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              <Store className="mr-2 size-5" />
-              Brands
-            </Link>
-            <Link
-              href="/categories"
-              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              <LayoutGrid className="mr-2 size-5" />
-              Categories
-            </Link>
-            <Link
-              href="/products"
-              className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              <PackageSearch className="mr-2 size-5" />
-              Products
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="flex items-center text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              >
+                <link.icon className="mr-2 size-5" />
+                {link.title}
+              </Link>
+            ))}
           </nav>
         </div>
         <div className="flex items-center justify-end space-x-2">
@@ -85,42 +88,17 @@ export default async function Navbar() {
             <DropdownMenuContent align="end">
               {isSignedIn ? (
                 <>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/account/orders"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <ShoppingBag className="h-4 w-4" />
-                      Orders
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/account/addresses"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <MapPin className="h-4 w-4" />
-                      Addresses
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/account/security"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <Shield className="h-4 w-4" />
-                      Security
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/account/settings"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <Settings className="h-4 w-4" />
-                      Settings
-                    </Link>
-                  </DropdownMenuItem>
+                  {accountDropdownContent.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        className="w-full cursor-pointer flex items-center gap-2"
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
                   <DropdownMenuSeparator />
                   <form
                     action={async () => {
@@ -141,25 +119,17 @@ export default async function Navbar() {
                 </>
               ) : (
                 <>
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/signin"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <LogIn className="h-4 w-4" />
-                      Sign In
-                    </Link>
-                  </DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem asChild>
-                    <Link
-                      href="/signup"
-                      className="w-full cursor-pointer flex items-center gap-2"
-                    >
-                      <UserPlus className="h-4 w-4" />
-                      Sign Up
-                    </Link>
-                  </DropdownMenuItem>
+                  {signInDropdownContent.map((item) => (
+                    <DropdownMenuItem key={item.href} asChild>
+                      <Link
+                        href={item.href}
+                        className="w-full cursor-pointer flex items-center gap-2"
+                      >
+                        <item.icon className="h-4 w-4" />
+                        {item.title}
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
                 </>
               )}
             </DropdownMenuContent>

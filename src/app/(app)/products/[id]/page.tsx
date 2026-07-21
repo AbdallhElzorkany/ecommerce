@@ -23,6 +23,7 @@ import ReviewCard from "@/components/cards/review-card";
 import { auth } from "@/lib/auth";
 import AddReviewForm from "@/components/reviews/addReviewForm";
 
+export const revalidate = 60;
 
 export default async function Page({
   params,
@@ -93,7 +94,7 @@ export default async function Page({
         {/* Images section */}
         <div className="w-full flex justify-center h-fit relative">
           {images.length > 0 ? (
-            <Carousel opts={{ loop: true }} className="w-full max-w-lg ">
+            <Carousel opts={{ loop: true, }} className="w-full max-w-lg ">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>

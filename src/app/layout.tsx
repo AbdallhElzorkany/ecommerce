@@ -27,7 +27,7 @@ export default function RootLayout({
         "antialiased",
         "font-sans",
         inter.variable,
-        
+        "dark"
       )}
     >
       <body className="min-h-screen">
