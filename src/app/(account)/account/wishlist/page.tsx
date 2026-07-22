@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { AlertCircle, Heart } from "lucide-react";
 
 import { AppDispatch, RootState } from "@/redux/store";
-import { removeWishlistItem, clearError, retrieveWishlist } from "@/redux/slices/wishlistSlice";
+import { removeWishlistItem, clearError } from "@/redux/slices/wishlistSlice";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
 import {
   ShoppingCart,
-  Heart,
   User,
   Store,
   LayoutGrid,
@@ -10,7 +9,6 @@ import {
   UserPlus,
   LogOut,
   LogIn,
-  Settings,
   ShoppingBag,
   MapPin,
   Shield,
