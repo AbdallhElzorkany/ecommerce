@@ -17,11 +17,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Star } from "lucide-react";
 import Image from "next/image";
-import AddToCartButton from "@/components/ui/addToCartButton";
-import AddToWishlistButton from "@/components/ui/addToWishlistButton";
+import AddToCartButton from "@/components/addToCartButton";
+import AddToWishlistButton from "@/components/addToWishlistButton";
 import ReviewCard from "@/components/cards/review-card";
-import { auth } from "@/lib/auth";
 import AddReviewForm from "@/components/reviews/addReviewForm";
+import { auth } from "@/lib/auth";
 
 export const revalidate = 60;
 

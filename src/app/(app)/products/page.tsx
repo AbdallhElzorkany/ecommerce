@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/cards/product-card";
-import { AppPagination } from "@/components/ui/app-pagination";
+import { AppPagination } from "@/components/app-pagination";
 import { ProductsResponse, Product } from "@/types/product";
 import { XCircle } from "lucide-react";
 
@@ -28,7 +28,9 @@ export default async function ProductsPage({
           {products.data.length === 0 ? (
             <div className="col-span-full gap-5 h-[50vh] flex flex-col items-center justify-center py-5">
               <XCircle className="w-12 h-12" />
-              <p className="text-muted-foreground text-2xl">No products found</p>
+              <p className="text-muted-foreground text-2xl">
+                No products found
+              </p>
             </div>
           ) : (
             products.data.map((product: Product) => (

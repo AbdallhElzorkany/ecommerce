@@ -2,6 +2,8 @@ import { Address, AddressesResponse } from "@/types/address";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { authHeaders } from "@/lib/helpers";
 import { toast } from "sonner";
+import { AddressFormData } from "@/components/add-address-sheet";
+
 const BASE = "https://ecommerce.routemisr.com/api/v1";
 
 export const retrieveAddresses = createAsyncThunk(
@@ -26,7 +28,7 @@ export const removeAddress = createAsyncThunk(
 );
 export const addAddress = createAsyncThunk(
   "address/addAddress",
-  async (address: Address): Promise<AddressesResponse> => {
+  async (address: AddressFormData): Promise<AddressesResponse> => {
     const headers = await authHeaders();
     const res = await fetch(`${BASE}/addresses`, {
       method: "POST",

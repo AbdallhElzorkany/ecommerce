@@ -1,6 +1,6 @@
 import { BrandCard } from "@/components/cards/brand-card";
 import { Brand, BrandsResponse } from "@/types/brand";
-import { AppPagination } from "@/components/ui/app-pagination";
+import { AppPagination } from "@/components/app-pagination";
 import { XCircle } from "lucide-react";
 
 export default async function BrandsPage({

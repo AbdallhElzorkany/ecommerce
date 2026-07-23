@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MapPin, ShoppingBag, Settings, Shield, Heart, ShoppingCart } from "lucide-react";
+import { MapPin, ShoppingBag, Shield, Heart, ShoppingCart } from "lucide-react";
 
 import {
   Sidebar as ShadcnSidebar,

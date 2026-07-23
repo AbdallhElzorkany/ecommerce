@@ -1,31 +1,26 @@
 "use client";
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 import { AlertCircle, MapPin } from "lucide-react";
 
 import { AppDispatch, RootState } from "@/redux/store";
 import {
-  retrieveAddresses,
   removeAddress,
-  addAddress,
   clearError,
 } from "@/redux/slices/addressesSlice";
 
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
 import { AddressCard } from "@/components/cards/address-card";
-
-export default function WishlistPage() {
+import { AddAddressSheet } from "@/components/add-address-sheet";
+export default function AddressesPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const router = useRouter();
   const { addresses, loading, error } = useSelector(
     (state: RootState) => state.addresses,
   );
 
-  useEffect(() => {
-    dispatch(retrieveAddresses());
-  }, [dispatch]);
+  const [sheetOpen, setSheetOpen] = useState(false);
+
 
   const handleRemove = useCallback(
     (addressId: string) => {
@@ -56,6 +51,9 @@ export default function WishlistPage() {
             )}
           </h1>
         </div>
+
+        {/* ── Add Address trigger (header) ── */}
+        <AddAddressSheet open={sheetOpen} onOpenChange={setSheetOpen} />
       </div>
 
       {error && (
@@ -65,7 +63,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-      {/* ── Cart items ── */}
+      {/* ── Address list ── */}
       <div className="space-y-5">
         {loading && addresses.length === 0 ? (
           <div className="flex justify-center items-center py-20">
@@ -85,7 +83,7 @@ export default function WishlistPage() {
               <Button
                 size="lg"
                 className="mt-4 cursor-pointer"
-                onClick={() => router.push("/products")}
+                onClick={() => setSheetOpen(true)}
                 id="add-address-btn"
               >
                 Add Address

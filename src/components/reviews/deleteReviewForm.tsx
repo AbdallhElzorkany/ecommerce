@@ -1,11 +1,11 @@
 import { Review } from "@/types/product";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import { Trash, Trash2 } from "lucide-react";
 import { deleteReview } from "@/lib/actions";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { Spinner } from "../ui/spinner";
+import { Spinner } from "@/components/ui/spinner";
 export default function DeleteReviewForm({
   review,
   token,

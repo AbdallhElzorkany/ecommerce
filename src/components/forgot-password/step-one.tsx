@@ -6,7 +6,7 @@ import { forgotPassword } from "@/lib/actions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field";
 const forgotPasswordSchema = z.object({
   email: z.email("Please enter a valid email address"),
 });

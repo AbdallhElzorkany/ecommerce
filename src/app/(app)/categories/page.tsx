@@ -1,5 +1,5 @@
 import { CategoryCard } from "@/components/cards/category-card";
-import { AppPagination } from "@/components/ui/app-pagination";
+import { AppPagination } from "@/components/app-pagination";
 import { CategoriesResponse, Category } from "@/types/category";
 import { XCircle } from "lucide-react";
 export default async function CategoriesPage({

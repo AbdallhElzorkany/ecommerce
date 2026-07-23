@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/cards/product-card";
-import { AppPagination } from "@/components/ui/app-pagination";
+import { AppPagination } from "@/components/app-pagination";
 import { BrandResponse } from "@/types/brand";
 import { Product, ProductsResponse } from "@/types/product";
 import { XCircle } from "lucide-react";
@@ -19,7 +19,9 @@ export default async function Page({
     await Promise.all([
       (await fetch(`${process.env.API_URL}/api/v1/brands/${id}`)).json(),
       (
-        await fetch(`${process.env.API_URL}/api/v1/products?brand=${id}&page=${pageNumber}&limit=12`)
+        await fetch(
+          `${process.env.API_URL}/api/v1/products?brand=${id}&page=${pageNumber}&limit=12`,
+        )
       ).json(),
     ]);
   return (
@@ -34,7 +36,9 @@ export default async function Page({
           {products.data.length === 0 ? (
             <div className="col-span-full gap-5 h-[50vh] flex flex-col items-center justify-center py-5">
               <XCircle className="w-12 h-12" />
-              <p className="text-muted-foreground text-2xl">No products found under {brand.data.name} yet</p>
+              <p className="text-muted-foreground text-2xl">
+                No products found under {brand.data.name} yet
+              </p>
             </div>
           ) : (
             products.data.map((product: Product) => (
@@ -45,7 +49,10 @@ export default async function Page({
       </section>
       {products.metadata.numberOfPages > 1 && (
         <section className="py-8">
-          <AppPagination metadata={products.metadata} basePath={`/brands/${id}`} />
+          <AppPagination
+            metadata={products.metadata}
+            basePath={`/brands/${id}`}
+          />
         </section>
       )}
     </main>

@@ -1,13 +1,13 @@
 "use client";
-import { Card } from "../ui/card";
+import { Card } from "@/components/ui/card";
 import { Star, Edit2 } from "lucide-react";
 import { Review } from "@/types/product";
 import { jwtDecode } from "jwt-decode";
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {  useMemo, useState } from "react";
-import UpdateReviewForm from "../reviews/updateReviewForm";
+import UpdateReviewForm from "@/components/reviews/updateReviewForm";
 
-import DeleteReviewForm from "../reviews/deleteReviewForm";
+import DeleteReviewForm from "@/components/reviews/deleteReviewForm";
 interface DecodedToken {
   id: string;
   name: string;

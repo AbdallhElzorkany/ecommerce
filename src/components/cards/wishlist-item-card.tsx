@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import AddToCartButton from "../ui/addToCartButton";
+import AddToCartButton from "@/components/addToCartButton";
 import { Product } from "@/types/product";
 import Link from "next/link";
 

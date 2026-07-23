@@ -74,7 +74,7 @@ const wishlistSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(retrieveWishlist.fulfilled, (state, action) => {
+      .addCase(retrieveWishlist.fulfilled, (state, action:PayloadAction<wishlistResponse>) => {
         state.wishlist = action.payload.data as Product[];
         state.count = action.payload.count;
         state.loading = false;
@@ -111,7 +111,7 @@ const wishlistSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(addToWishlist.fulfilled, (state, action) => {
+      .addCase(addToWishlist.fulfilled, (state, action:PayloadAction<AddItemResponse>) => {
         state.loading = false;
         if (action.payload.response.status === "success") {
           state.count++;

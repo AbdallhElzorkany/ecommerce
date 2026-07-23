@@ -1,6 +1,6 @@
 "use client";
 import { Heart } from "lucide-react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import {
   addToWishlist,
   removeWishlistItem,

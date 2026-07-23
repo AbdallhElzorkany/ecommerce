@@ -1,6 +1,6 @@
 "use client";
 import { ShoppingCart } from "lucide-react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import { addToCart } from "@/redux/slices/cartSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";

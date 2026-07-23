@@ -57,7 +57,7 @@ export default function WishlistPage() {
         </div>
       )}
 
-        {/* ── Cart items ── */}
+        {/* ── Wishlist items ── */}
         <div className="space-y-5">
           {loading && count === 0 ? (
             <div className="flex justify-center items-center py-20">

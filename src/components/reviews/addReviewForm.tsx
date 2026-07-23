@@ -3,20 +3,25 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Textarea } from "../ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "../ui/card";
-import { Field, FieldContent, FieldLabel, FieldError } from "../ui/field";
+} from "@/components/ui/card";
+import {
+  Field,
+  FieldContent,
+  FieldLabel,
+  FieldError,
+} from "@/components/ui/field";
 import { createReview } from "@/lib/actions";
-import { Label } from "../ui/label";
-import { Spinner } from "../ui/spinner";
+import { Label } from "@/components/ui/label";
+import { Spinner } from "@/components/ui/spinner";
 import { RefreshCcw, Save } from "lucide-react";
 
 export const reviewSchema = z.object({

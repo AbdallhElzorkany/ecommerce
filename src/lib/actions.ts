@@ -1,7 +1,7 @@
 "use server";
 
 import { VerifyResetCodeFormData } from "@/components/forgot-password/step-two";
-import { SignupFormData } from "../app/(auth)/signup/page";
+import { SignupFormData } from "@/app/(auth)/signup/page";
 import { ForgotPasswordFormData } from "@/components/forgot-password/step-one";
 import { ResetPasswordFormData } from "@/components/forgot-password/step-three";
 import { ResetLoggedInPasswordFormData } from "@/app/(account)/account/security/page";

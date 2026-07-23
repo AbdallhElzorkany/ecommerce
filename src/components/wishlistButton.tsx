@@ -1,6 +1,6 @@
 "use client";
 import { Heart } from "lucide-react";
-import { Button } from "./button";
+import { Button } from "@/components/ui/button";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/redux/store";
 import Link from "next/link";

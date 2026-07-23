@@ -7,6 +7,7 @@ import {
   SidebarInset,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
+import AddressesDispatch from "@/components/addressesDispatch";
 export default async function AccountLayout({
   children,
 }: {
@@ -32,6 +33,7 @@ export default async function AccountLayout({
           <Separator orientation="vertical" className="h-14" />
           <span className="font-semibold text-sm">Account Menu</span>
         </header>
+        <AddressesDispatch />
         <main className="flex-1 p-4 md:p-6 lg:p-8">{children}</main>
       </SidebarInset>
     </SidebarProvider>

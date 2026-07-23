@@ -5,7 +5,7 @@ import { CircleAlertIcon } from "lucide-react";
 import { verifyResetCode } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/ui/spinner";
-import { Field, FieldError, FieldGroup } from "../ui/field";
+import { Field, FieldError, FieldGroup } from "@/components/ui/field";
 import {
   InputOTP,
   InputOTPGroup,

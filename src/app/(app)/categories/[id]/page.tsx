@@ -1,5 +1,5 @@
 import { ProductCard } from "@/components/cards/product-card";
-import { AppPagination } from "@/components/ui/app-pagination";
+import { AppPagination } from "@/components/app-pagination";
 import { CategoryResponse } from "@/types/category";
 import { Product, ProductsResponse } from "@/types/product";
 import { XCircle } from "lucide-react";

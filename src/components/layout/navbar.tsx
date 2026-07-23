@@ -21,8 +21,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import CartButton from "../ui/cartButton";
-import WishlistButton from "../ui/wishlistButton";
+import CartButton from "@/components/cartButton";
+import WishlistButton from "@/components/wishlistButton";
 const accountDropdownContent = [
   { title: "Orders", href: "/account/orders", icon: ShoppingBag },
   { title: "Addresses", href: "/account/addresses", icon: MapPin },
