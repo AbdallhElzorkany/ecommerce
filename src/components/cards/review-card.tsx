@@ -2,31 +2,23 @@
 import { Card } from "@/components/ui/card";
 import { Star, Edit2 } from "lucide-react";
 import { Review } from "@/types/product";
-import { jwtDecode } from "jwt-decode";
 import { Button } from "@/components/ui/button";
-import {  useMemo, useState } from "react";
+import { useState } from "react";
 import UpdateReviewForm from "@/components/reviews/updateReviewForm";
 
 import DeleteReviewForm from "@/components/reviews/deleteReviewForm";
-interface DecodedToken {
-  id: string;
-  name: string;
-  role: string;
-  iat: number;
-  exp: number;
-}
+
 export default function ReviewCard({
   review,
   token,
+  userId,
 }: {
   review: Review;
   token?: string;
+  userId?: string;
 }) {
   const [isEditing, setIsEditing] = useState(false);
-  const decodedToken = useMemo(
-    () => (token ? jwtDecode<DecodedToken>(token) : null),
-    [token],
-  );
+
 
   return (
     <Card key={review._id} className="p-6 rounded-2xl shadow-sm">
@@ -58,7 +50,7 @@ export default function ReviewCard({
               </div>
             </div>
             <div className="flex flex-col gap-1 items-center">
-              {decodedToken?.id === review.user?._id && (
+              {userId === review.user?._id && (
                 <div className="flex items-center gap-1">
                   <Button
                     variant="ghost"

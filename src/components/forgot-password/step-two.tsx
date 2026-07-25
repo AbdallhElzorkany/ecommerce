@@ -11,7 +11,7 @@ import {
   InputOTPGroup,
   InputOTPSeparator,
   InputOTPSlot,
-} from "../ui/input-otp";
+} from "@/components/ui/input-otp";
 
 const verifyResetCodeSchema = z.object({
   resetCode: z.string().regex(/^[0-9]{6}$/, "Reset code must be 6 digits"),

@@ -22,7 +22,15 @@ import AddToWishlistButton from "@/components/addToWishlistButton";
 import ReviewCard from "@/components/cards/review-card";
 import AddReviewForm from "@/components/reviews/addReviewForm";
 import { auth } from "@/lib/auth";
+import { jwtDecode } from "jwt-decode";
 
+interface DecodedToken {
+  id: string;
+  name: string;
+  role: string;
+  iat: number;
+  exp: number;
+}
 export const revalidate = 60;
 
 export default async function Page({
@@ -36,7 +44,6 @@ export default async function Page({
     fetch(`${process.env.API_URL}/api/v1/products/${id}/reviews`),
     auth(),
   ]);
-
   if (!productReq.ok) {
     return (
       <div className="min-h-[calc(100vh-65px)] flex flex-col justify-center items-center">
@@ -48,10 +55,15 @@ export default async function Page({
     );
   }
 
-  const productResponse = (await productReq.json()) as ProductResponse;
-  const reviewsResponse = (await reviewsReq.json()) as ReviewsResponse;
+  const [productResponse, reviewsResponse] = (await Promise.all([
+    productReq.json(),
+    reviewsReq.json(),
+  ])) as [ProductResponse, ReviewsResponse];
   const product = productResponse.data;
   const reviews = reviewsResponse.data;
+  const userId = session?.accessToken
+    ? jwtDecode<DecodedToken>(session?.accessToken).id
+    : "";
 
   const images =
     product.images?.length > 0
@@ -94,7 +106,7 @@ export default async function Page({
         {/* Images section */}
         <div className="w-full flex justify-center h-fit relative">
           {images.length > 0 ? (
-            <Carousel opts={{ loop: true, }} className="w-full max-w-lg ">
+            <Carousel opts={{ loop: true }} className="w-full max-w-lg ">
               <CarouselContent>
                 {images.map((image, index) => (
                   <CarouselItem key={index}>
@@ -223,6 +235,7 @@ export default async function Page({
                 key={review._id}
                 review={review}
                 token={session?.accessToken}
+                userId={userId}
               />
             ))}
           </div>
