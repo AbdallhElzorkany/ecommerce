@@ -18,7 +18,7 @@ import {
 const sidebarItems = [
   { title: "Cart", href: "/account/cart", icon: ShoppingCart },
   { title: "Wishlist", href: "/account/wishlist", icon: Heart },
-  { title: "Orders", href: "/account/orders", icon: ShoppingBag },
+  { title: "Orders", href: "/account/allorders", icon: ShoppingBag },
   { title: "Addresses", href: "/account/addresses", icon: MapPin },
   { title: "Security", href: "/account/security", icon: Shield },
 ];

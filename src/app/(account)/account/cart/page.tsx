@@ -82,7 +82,7 @@ export default function CartPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <ShoppingCart className="size-7" />
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-xl font-bold">
             Your Cart
             {cart.products.length > 0 && (
               <span className="ml-2 text-base font-medium text-muted-foreground">
@@ -173,8 +173,8 @@ export default function CartPage() {
 
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className="font-medium text-green-600 dark:text-green-400">
-                    Free
+                  <span className="font-medium text-destructive">
+                    Unknown
                   </span>
                 </div>
               </div>

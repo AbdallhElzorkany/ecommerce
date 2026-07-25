@@ -24,7 +24,7 @@ import {
 import CartButton from "@/components/cartButton";
 import WishlistButton from "@/components/wishlistButton";
 const accountDropdownContent = [
-  { title: "Orders", href: "/account/orders", icon: ShoppingBag },
+  { title: "Orders", href: "/account/allorders", icon: ShoppingBag },
   { title: "Addresses", href: "/account/addresses", icon: MapPin },
   { title: "Security", href: "/account/security", icon: Shield },
 ];

@@ -39,7 +39,7 @@ export default function WishlistPage() {
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
           <Heart className="size-7" />
-          <h1 className="text-3xl font-bold">
+          <h1 className="text-xl font-bold">
             Your Wishlist
             {count > 0 && (
               <span className="ml-2 text-base font-medium text-muted-foreground">
