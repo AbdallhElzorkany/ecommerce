@@ -10,7 +10,7 @@ interface BrandCardProps {
 export function BrandCard({ brand }: BrandCardProps) {
   return (
     <Link href={`/brands/${brand._id}`} title={brand.name}>
-      <Card className="group relative flex flex-col items-center justify-center overflow-hidden transition-all hover:shadow-md hover:border-primary h-32 md:h-40 bg-white dark:bg-card">
+      <Card className="group relative flex flex-col items-center justify-center overflow-hidden transition-all hover:shadow-md hover:border-primary h-32 md:h-40 bg-white dark:bg-black">
         <div className="relative w-full h-full flex items-center justify-center">
           <Image
             src={brand.image}
