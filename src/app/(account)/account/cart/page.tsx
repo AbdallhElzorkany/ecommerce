@@ -172,9 +172,15 @@ export default function CartPage() {
                 </div>
 
                 <div className="flex justify-between">
+                  <span className="text-muted-foreground">Tax</span>
+                  <span className="font-medium text-green-600 dark:text-green-400">
+                    Free / 20$
+                  </span>
+                </div>
+                <div className="flex justify-between">
                   <span className="text-muted-foreground">Shipping</span>
-                  <span className="font-medium text-destructive">
-                    Unknown
+                  <span className="font-medium text-green-600 dark:text-green-400">
+                    Free / 100$
                   </span>
                 </div>
               </div>

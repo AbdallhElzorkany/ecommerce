@@ -15,7 +15,6 @@ export default async function AccountLayout({
 }) {
   const session = await auth();
   if (!session) redirect("/signin");
-  console.log(session);
   return (
     <SidebarProvider
       style={

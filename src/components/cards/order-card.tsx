@@ -130,7 +130,7 @@ export function OrderCard({ order }: { order: Order }) {
         {/* ── Details grid ── */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
           {/* Shipping address */}
-          <div className="rounded-2xl bg-muted/30 p-3.5 ring-1 ring-foreground/[0.03] space-y-2">
+          <div className="rounded-2xl bg-muted/30 p-3.5 ring-1 ring-foreground/3 space-y-2">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
               <MapPin className="size-3.5" />
               Shipping Address
@@ -148,7 +148,7 @@ export function OrderCard({ order }: { order: Order }) {
           </div>
 
           {/* Payment info */}
-          <div className="rounded-2xl bg-muted/30 p-3.5 ring-1 ring-foreground/[0.03] space-y-2">
+          <div className="rounded-2xl bg-muted/30 p-3.5 ring-1 ring-foreground/3 space-y-2">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
               <CreditCard className="size-3.5" />
               Payment
