@@ -437,6 +437,7 @@ export default function CheckoutPage() {
                       <div className="relative size-14 rounded-lg overflow-hidden border bg-muted shrink-0">
                         {item.product.imageCover ? (
                           <Image
+                            loading="lazy"
                             src={item.product.imageCover}
                             alt={item.product.title}
                             fill
