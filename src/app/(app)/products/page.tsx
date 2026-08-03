@@ -2,6 +2,13 @@ import { ProductCard } from "@/components/cards/product-card";
 import { AppPagination } from "@/components/app-pagination";
 import { ProductsResponse, Product } from "@/types/product";
 import { XCircle } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Products",
+  description: "Discover all products available in Souq.",
+  keywords: ["Products", "all products", "discover all products"],
+};
 
 export default async function ProductsPage({
   searchParams,

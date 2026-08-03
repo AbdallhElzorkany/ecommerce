@@ -10,8 +10,26 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Souq",
+  title: {
+    default: "Souq",
+    template: "%s | Souq",
+  },
   description: "The best place to find everything you need",
+  keywords: [
+    "Souq",
+    "Shop",
+    "Online Store",
+    "E-commerce",
+    "Best place to find everything",
+  ],
+
+  authors: [
+    { name: "Abdallah Elzorkany", url: "https://github.com/AbdallhElzorkany" },
+    { name: "Route Misr", url: "https://routeeg.com/" },
+  ],
+  category: "E-Commerce",
+  creator: "Abdallah Elzorkany",
+  publisher: "Abdallah Elzorkany",
 };
 
 export default function RootLayout({
@@ -27,11 +45,10 @@ export default function RootLayout({
         "antialiased",
         "font-sans",
         inter.variable,
-        "dark"
+        "dark",
       )}
     >
       <body className="min-h-screen">
-        
         <SessionProvider>
           <ReduxProvider>
             <Navbar />

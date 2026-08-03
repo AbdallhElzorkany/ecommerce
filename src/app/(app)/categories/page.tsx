@@ -2,6 +2,14 @@ import { CategoryCard } from "@/components/cards/category-card";
 import { AppPagination } from "@/components/app-pagination";
 import { CategoriesResponse, Category } from "@/types/category";
 import { XCircle } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Categories",
+  description: "Discover all categories available in Souq.",
+  keywords: ["Categories", "all categories", "discover all categories"],
+};
+
 export default async function CategoriesPage({
   searchParams,
 }: {

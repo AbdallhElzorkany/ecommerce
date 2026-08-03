@@ -3,6 +3,31 @@ import { AppPagination } from "@/components/app-pagination";
 import { BrandResponse } from "@/types/brand";
 import { Product, ProductsResponse } from "@/types/product";
 import { XCircle } from "lucide-react";
+import { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const brand = (await (
+    await fetch(`${process.env.API_URL}/api/v1/brands/${id}`)
+  ).json()) as BrandResponse;
+  return {
+    title: brand.data.name,
+    description: brand.data.slug,
+    keywords: [brand.data.name, brand.data.slug],
+    openGraph: {
+      title: brand.data.name,
+      description: brand.data.slug,
+      images: brand.data.image,
+      type: "website",
+      url: `${process.env.APP_URL}/brands/${brand.data._id}`,
+    },
+  };
+}
+
 
 export default async function Page({
   params,

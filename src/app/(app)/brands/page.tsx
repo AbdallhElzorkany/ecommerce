@@ -2,6 +2,13 @@ import { BrandCard } from "@/components/cards/brand-card";
 import { Brand, BrandsResponse } from "@/types/brand";
 import { AppPagination } from "@/components/app-pagination";
 import { XCircle } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Brands",
+  description: "Discover all brands available in Souq.",
+  keywords: ["Brands", "all brands", "discover all brands"],
+};
 
 export default async function BrandsPage({
   searchParams,

@@ -8,6 +8,14 @@ import {
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import AddressesDispatch from "@/components/addressesDispatch";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Account",
+  description: "Manage your account",
+  keywords: ["Account", "manage your account"],
+};
+
 export default async function AccountLayout({
   children,
 }: {

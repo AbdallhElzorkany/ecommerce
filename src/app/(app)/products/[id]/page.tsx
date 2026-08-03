@@ -23,6 +23,7 @@ import ReviewCard from "@/components/cards/review-card";
 import AddReviewForm from "@/components/reviews/addReviewForm";
 import { auth } from "@/lib/auth";
 import { jwtDecode } from "jwt-decode";
+import { Metadata } from "next";
 
 interface DecodedToken {
   id: string;
@@ -31,7 +32,29 @@ interface DecodedToken {
   iat: number;
   exp: number;
 }
-export const revalidate = 60;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const product = await (
+    await fetch(`${process.env.API_URL}/api/v1/products/${id}`)
+  ).json() as ProductResponse;
+  return {
+    title: product.data.title,
+    description: product.data.description,
+    keywords: [product.data.category.name, product.data.brand.name, product.data.title, product.data.slug],
+    openGraph: {
+      title: product.data.title,
+      description: product.data.description,
+      images: product.data.imageCover,
+      type: "website",
+      url: `${process.env.APP_URL}/products/${product.data._id}`,
+    },
+  };
+}
 
 export default async function Page({
   params,
@@ -168,8 +191,8 @@ export default async function Page({
                 </span>
               </div>
               <Separator orientation="vertical" className="h-6" />
-              <span className="text-sm font-medium cursor-pointer transition-colors">
-                {product.ratingsQuantity} reviews
+              <span className="text-sm font-medium transition-colors">
+                {reviews.length} reviews
               </span>
               <Separator orientation="vertical" className="h-6" />
               <span className="text-sm font-medium">{product.sold} sold</span>

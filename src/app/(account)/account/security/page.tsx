@@ -135,7 +135,7 @@ export default function ResetLoggedInPasswordPage() {
               )}
               <form onSubmit={handleSubmit(onSubmit)}>
                 <FieldGroup>
-                  {/* Name */}
+                  {/* Password */}
                   <Field data-invalid={!!errors.currentPassword}>
                     <FieldLabel htmlFor="currentPassword">
                       Current Password
@@ -151,7 +151,7 @@ export default function ResetLoggedInPasswordPage() {
                     <FieldError>{errors.currentPassword?.message}</FieldError>
                   </Field>
 
-                  {/* Password */}
+                  {/* New Password */}
                   <Field data-invalid={!!errors.password}>
                     <FieldLabel htmlFor="password">Password</FieldLabel>
                     <div className="relative">
