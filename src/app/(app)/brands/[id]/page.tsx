@@ -21,13 +21,19 @@ export async function generateMetadata({
     openGraph: {
       title: brand.data.name,
       description: brand.data.slug,
-      images: brand.data.image,
+      images: {
+        url: brand.data.image,
+        width: 300,
+        height: 150,
+        alt: brand.data.name,
+      },
       type: "website",
       url: `${process.env.APP_URL}/brands/${brand.data._id}`,
+      siteName: "Souq",
+      countryName: "Egypt",
     },
   };
 }
-
 
 export default async function Page({
   params,

@@ -49,9 +49,16 @@ export async function generateMetadata({
     openGraph: {
       title: product.data.title,
       description: product.data.description,
-      images: product.data.imageCover,
+      images: {
+        url: product.data.imageCover,
+        width: 200,
+        height: 300,
+        alt: product.data.title,
+      },
       type: "website",
       url: `${process.env.APP_URL}/products/${product.data._id}`,
+      siteName: "Souq",
+      countryName: "Egypt",
     },
   };
 }

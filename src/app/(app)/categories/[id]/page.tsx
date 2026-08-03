@@ -21,9 +21,16 @@ export async function generateMetadata({
     openGraph: {
       title: category.data.name,
       description: category.data.slug,
-      images: category.data.image,
+      images: {
+        url: category.data.image,
+        width: 300,
+        height: 150,
+        alt: category.data.name,
+      },
       type: "website",
       url: `${process.env.APP_URL}/categories/${category.data._id}`,
+      siteName: "Souq",
+      countryName: "Egypt",
     },
   };
 }
