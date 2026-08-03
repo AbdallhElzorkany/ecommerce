@@ -48,7 +48,7 @@ export default async function OrdersPage() {
             </div>
           </section>
         ) : (
-          orders.map((order: Order) => (
+          orders.toReversed().map((order: Order) => (
             <OrderCard
               key={order.id}
               order={order}
