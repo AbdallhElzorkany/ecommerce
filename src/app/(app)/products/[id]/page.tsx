@@ -39,16 +39,21 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const product = await (
+  const product = (await (
     await fetch(`${process.env.API_URL}/api/v1/products/${id}`)
-  ).json() as ProductResponse;
+  ).json()) as ProductResponse;
   return {
     title: product.data.title,
-    description: product.data.description,
-    keywords: [product.data.category.name, product.data.brand.name, product.data.title, product.data.slug],
+    description: `${product.data.description} | Price: ${product.data.price}`,
+    keywords: [
+      product.data.category.name,
+      product.data.brand.name,
+      product.data.title,
+      product.data.slug,
+    ],
     openGraph: {
       title: product.data.title,
-      description: product.data.description + "\n" + `Price: ${product.data.price}`,
+      description: `${product.data.description} | Price: ${product.data.price}`,
       images: {
         url: product.data.imageCover,
         width: 200,
